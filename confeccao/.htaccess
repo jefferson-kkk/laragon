@@ -1,0 +1,12 @@
+# Redirect all requests to the public directory
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # if the requested filename exists in the project root, serve it
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # otherwise forward to /public
+    RewriteRule ^(.*)$ public/$1 [L,QSA]
+</IfModule>
